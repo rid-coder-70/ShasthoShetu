@@ -29,7 +29,7 @@ ShasthoShetu ("Health Bridge") is an integrated digital platform designed to bri
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/shasthoshetu.git
+    git clone https://github.com//shasthoshetu.git
     cd shasthoshetu
     ```
 
