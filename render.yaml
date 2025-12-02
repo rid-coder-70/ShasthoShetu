@@ -23,7 +23,4 @@ services:
     startCommand: npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: shasthoshetu-server
-          property: url
+        value: https://shasthoshetu-server.onrender.com
