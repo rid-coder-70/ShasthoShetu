@@ -25,4 +25,4 @@ services:
     startCommand: npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        value: https://shasthoshetu-server.onrender.com
+        sync: false
