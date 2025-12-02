@@ -56,6 +56,111 @@ ShasthoShetu ("Health Bridge") is an integrated digital platform designed to bri
 - `/client`: Next.js frontend application.
 - `/server`: Node.js/Express backend API.
 
+## System Architecture
+
+```mermaid
+graph TD
+    subgraph Client [Next.js Frontend]
+        UI[User Interface]
+        AuthPage[Login/Signup]
+        Dash[Dashboard]
+        InvPage[Inventory Page]
+        EmerPage[Emergency Page]
+        MarketPage[Marketplace Page]
+        
+        UI --> AuthPage
+        UI --> Dash
+        Dash --> InvPage
+        Dash --> EmerPage
+        Dash --> MarketPage
+    end
+
+    subgraph Server [Node.js/Express Backend]
+        API[REST API]
+        AuthCtrl[Auth Controller]
+        InvCtrl[Inventory Controller]
+        EmerCtrl[Emergency Controller]
+        MarketCtrl[Marketplace Controller]
+        PredCtrl[Prediction Controller]
+        
+        API --> AuthCtrl
+        API --> InvCtrl
+        API --> EmerCtrl
+        API --> MarketCtrl
+        API --> PredCtrl
+    end
+
+    subgraph Database [MongoDB]
+        UsersColl[(Users)]
+        InvColl[(Inventory)]
+        EmerColl[(Emergencies)]
+        MarketColl[(Marketplace)]
+    end
+
+    Client -- HTTP Requests --> Server
+    AuthCtrl --> UsersColl
+    InvCtrl --> InvColl
+    EmerCtrl --> EmerColl
+    MarketCtrl --> MarketColl
+    PredCtrl --> InvColl
+```
+
+## Database Schema
+
+```mermaid
+erDiagram
+    USER ||--o{ INVENTORY : manages
+    USER ||--o{ EMERGENCY : raises
+    USER ||--o{ MARKETPLACE_ITEM : sells
+    
+    USER {
+        ObjectId _id
+        String name
+        String email
+        String password
+        String role
+        String organizationName
+        Object location
+        String contactNumber
+    }
+
+    INVENTORY {
+        ObjectId _id
+        ObjectId user
+        String name
+        String genericName
+        String category
+        Number quantity
+        String unit
+        Date expiryDate
+        String batchNumber
+        String supplier
+        Number threshold
+    }
+
+    EMERGENCY {
+        ObjectId _id
+        ObjectId user
+        String type
+        String description
+        String status
+        Object location
+        String contactNumber
+    }
+
+    MARKETPLACE_ITEM {
+        ObjectId _id
+        ObjectId seller
+        String name
+        Number quantity
+        String unit
+        Number price
+        Date expiryDate
+        String description
+        String status
+    }
+```
+
 ## License
 
 This project is licensed under the MIT License.
